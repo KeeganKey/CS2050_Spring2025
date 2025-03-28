@@ -1,5 +1,14 @@
 import java.util.Scanner;
 
+//A large portion of this code was written on my Linux machine, so the versioning may look strange.
+
+//Linkage between sort and main
+//Input for sort is compressed 2D array
+//print the sorted compressed 2D array in main
+
+//File input!
+//Try catch for file input-
+
 public class CarvanaVendingMachine {
 
     public static void main(String[] args) {
@@ -16,16 +25,22 @@ public class CarvanaVendingMachine {
         
         VendingMachine vm = new VendingMachine(floors, spaces, tower);
 
+        System.out.println("||||||||||||||||||||||||||||||||||||||||||||||||||");
         System.out.println("Welcome to the car tower terminal! Select an option");
         int userChoice;
 
         do {
             System.out.println("Please choose an option:");
-            System.out.println("1.Inventory report!");
-            System.out.println("2.Search a car space!");
-            System.out.println("3.Add a car!");
-            System.out.println("4.Remove a car from your tower!");
-            System.out.println("5.Check total number of cars!");
+            System.out.println("1.Inventory report ");
+            System.out.println("2.Search a car space ");
+//Adding cars not done through file input
+            System.out.println("3.Add a car ");
+            System.out.println("4.Remove a car from your tower ");
+            System.out.println("5.Check total number of cars ");
+            System.out.println("6.Display list sorted by price ");
+            System.out.println("7.Display list sorted by year ");
+       System.out.println("||||||||||||||||||||||||||||||||||||||||||||||||||");
+
 
             userChoice = scanner.nextInt();
 
@@ -71,9 +86,22 @@ public class CarvanaVendingMachine {
                     System.out.println("Checking total number of cars...");
                     System.out.println("You have" + "" + vm.carCount() + "" + "cars.");
                     break;
-            }
+                    
+                case 6:
+                	System.out.println("Here is your inventory sorted by price: ");
+                	break;
+                	
+                case 7:
+                	System.out.println("Here is your inventory sorted by year: ");
+                	break;
+                	
+                case 8:
+                	System.out.println("Exit.");
+                	break;
+         
+            } 
 
-        } while (userChoice < 6);
+        } while (userChoice < 9);
 
        scanner.close();
     }
@@ -189,19 +217,24 @@ class VendingMachine {
 
             if (carAtIndex != null) {
             	
-                System.out.println("The car at floor " + checkFloor + ", space " + checkSpace + " is: ");
+                System.out.println("||||||||||||||||||||||||||||||||||||||||||||||||||");
+                System.out.println("The car at this floor/space is: " + checkFloor + checkSpace);
                 
                 System.out.println("Name: " + carAtIndex.getName());
                 System.out.println("Year: " + carAtIndex.getYear());
                 System.out.println("Price: " + carAtIndex.getPrice());
+                System.out.println("||||||||||||||||||||||||||||||||||||||||||||||||||");
+
             } 
             
             else {
+                System.out.println("||||||||||||||||||||||||||||||||||||||||||||||||||");
                 System.out.println("This space is empty!");
            }
         } 
         
         else {
+            System.out.println("||||||||||||||||||||||||||||||||||||||||||||||||||");
             System.out.println("This floor/space doesn't exist!");
         }
       
@@ -244,7 +277,62 @@ class VendingMachine {
 	        }
 	        System.out.println(report);
 	    }
+	   
+//Sorting algorithms for the cars
 	
+	   
+	   public static void sortByPrice(car[] cars) {
+		   
+		   for (int i = 0; i < cars.length - 1; i++) {
+			   for (int j = 0; j < cars.length - 1 - i; j++) {
+				   if (cars[j].getPrice() > cars[j + 1].getPrice()) {
+					   
+					   car temp = cars[j];
+					   cars[j] = cars[j + 1];
+					   cars[j + 1] = temp;
+				   }
+			   }
+		   }
+		   
+	       
+		   for (car car : cars) {
+		   System.out.println("||||||||||||||||||||||||||||||||||||||||||||||||||");
+			   System.out.println("Name: " + car.getName());
+			   System.out.println("Price: " + car.getPrice());
+			   System.out.println("Year: " + car.getYear());
+			   System.out.println("");
+		   System.out.println("||||||||||||||||||||||||||||||||||||||||||||||||||");
+
+		   }
+		   
+	   }
+	   
+	   public static void sortByYear(car[] cars) {
+		   
+		   for (int i = 0; i < cars.length - 1; i++) {
+	            for (int j = 0; j < cars.length - 1 - i; j++) {
+	                if (cars[j].getYear() > cars[j + 1].getYear()) {
+	                   
+	                    car temp = cars[j];
+	                    cars[j] = cars[j + 1];
+	                    cars[j + 1] = temp;
+	                }
+	            }
+	        }
+		   
+		   System.out.println("");
+		   
+		   for (car car : cars) {
+		       System.out.println("||||||||||||||||||||||||||||||||||||||||||||||||||");
+			   System.out.println("Name: " + car.getName());
+			   System.out.println("Price: " + car.getPrice());
+			   System.out.println("Year: " + car.getYear());
+			   System.out.println("");
+		       System.out.println("||||||||||||||||||||||||||||||||||||||||||||||||||");
+
+			   
+		   }
+	   }
 
 /*
 			public int getFloors() {
@@ -434,4 +522,4 @@ public int carCount() {
 		}
 	}
 	*/
- 
+  
